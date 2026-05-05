@@ -135,16 +135,19 @@
     table.results td {
       padding: 5px 6px;
       border-bottom: 1px solid rgba(60,45,30,0.2);
-      overflow-wrap: anywhere;
     }
-    table.results th:nth-child(1),
-    table.results td:nth-child(1) { width: 28%; }
-    table.results th:nth-child(2),
-    table.results td:nth-child(2),
-    table.results th:nth-child(3),
-    table.results td:nth-child(3) { width: 22%; text-align: right; }
-    table.results th:nth-child(4),
-    table.results td:nth-child(4) { width: 28%; text-align: right; }
+    table.results tbody td:nth-child(1) { width: 28%; text-align: left; }
+    table.results tbody td:nth-child(2),
+    table.results tbody td:nth-child(3) { width: 22%; text-align: right; }
+    table.results tbody td:nth-child(4) { width: 28%; text-align: right; }
+    table.results thead tr:first-child th[colspan="2"] {
+      text-align: center;
+      letter-spacing: 0.18em;
+      font-size: 0.58rem;
+      padding-bottom: 4px;
+      border-bottom: 1px solid rgba(60,45,30,0.14);
+    }
+    table.results thead tr:last-child th { white-space: nowrap; padding-top: 6px; }
     table.results th {
       font-family: "Cinzel", serif;
       font-size: 0.58rem;
@@ -152,10 +155,9 @@
       text-transform: uppercase;
       background: rgba(60,45,30,0.08);
     }
-    table.results th:nth-child(1) { text-align: left; }
-    table.results th:nth-child(2),
-    table.results th:nth-child(3),
-    table.results th:nth-child(4) { text-align: right; }
+    table.results thead tr:first-child th:first-child { text-align: left; vertical-align: bottom; }
+    table.results thead tr:first-child th:last-child { text-align: right; vertical-align: bottom; }
+    table.results thead tr:last-child th { text-align: right; }
     .pct {
       font-size: 2em;
       font-weight: 900;
@@ -217,16 +219,24 @@
             <h2>Ваши замеры</h2>
             <table class="results">
               <thead>
-                <tr><th>Зона</th><th>Идеал, см</th><th>Факт, см</th><th>% идеала</th></tr>
+                <tr>
+                  <th rowspan="2">Зона</th>
+                  <th colspan="2">см</th>
+                  <th rowspan="2">% идеала</th>
+                </tr>
+                <tr>
+                  <th>Идеал</th>
+                  <th>Факт</th>
+                </tr>
               </thead>
               <tbody>
-                <tr><td>Грудь</td><td class="num">110.5 см</td><td class="num">104.0 см</td><td class="pct bad">94.1%</td></tr>
-                <tr><td>Талия</td><td class="num">77.4 см</td><td class="num">88.0 см</td><td class="pct bad">113.7%</td></tr>
-                <tr><td>Бедро</td><td class="num">58.6 см</td><td class="num">58.7 см</td><td class="pct good">100.2%</td></tr>
-                <tr><td>Шея</td><td class="num">40.9 см</td><td class="num">40.0 см</td><td class="pct bad">97.8%</td></tr>
-                <tr><td>Бицепс</td><td class="num">39.8 см</td><td class="num">38.5 см</td><td class="pct bad">96.7%</td></tr>
-                <tr><td>Голень</td><td class="num">37.6 см</td><td class="num">40.0 см</td><td class="pct good">106.4%</td></tr>
-                <tr><td>Предплечье</td><td class="num">32.0 см</td><td class="num">29.0 см</td><td class="pct bad">90.6%</td></tr>
+                <tr><td>Грудь</td><td class="num">110.5</td><td class="num">104.0</td><td class="pct bad">94.1%</td></tr>
+                <tr><td>Талия</td><td class="num">77.4</td><td class="num">88.0</td><td class="pct bad">113.7%</td></tr>
+                <tr><td>Бедро</td><td class="num">58.6</td><td class="num">58.7</td><td class="pct good">100.2%</td></tr>
+                <tr><td>Шея</td><td class="num">40.9</td><td class="num">40.0</td><td class="pct bad">97.8%</td></tr>
+                <tr><td>Бицепс</td><td class="num">39.8</td><td class="num">38.5</td><td class="pct bad">96.7%</td></tr>
+                <tr><td>Голень</td><td class="num">37.6</td><td class="num">40.0</td><td class="pct good">106.4%</td></tr>
+                <tr><td>Предплечье</td><td class="num">32.0</td><td class="num">29.0</td><td class="pct bad">90.6%</td></tr>
               </tbody>
             </table>
           </aside>
