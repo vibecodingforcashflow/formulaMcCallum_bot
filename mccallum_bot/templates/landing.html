@@ -194,33 +194,50 @@
       width: 38%;
       text-align: right;
     }
-    table.results thead tr:first-child th[colspan="2"] {
-      text-align: center;
-      letter-spacing: 0.18em;
-      font-size: 0.58rem;
-      padding-bottom: 4px;
-      border-bottom: 1px solid rgba(60,45,30,0.14);
-    }
-    table.results thead tr:last-child th {
-      white-space: nowrap;
-      padding-top: 6px;
-    }
-    table.results th {
-      font-family: "Cinzel", serif;
-      font-size: 0.62rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      background: rgba(60,45,30,0.08);
-    }
-    table.results thead tr:first-child th:first-child {
+    table.results thead th.th-zone {
       text-align: left;
       vertical-align: bottom;
     }
-    table.results thead tr:first-child th:last-child {
+    table.results thead th.th-metric,
+    table.results thead th.th-pct-hdr {
       text-align: right;
       vertical-align: bottom;
+      white-space: nowrap;
     }
-    table.results thead tr:last-child th { text-align: right; }
+    table.results thead .hdr-inline {
+      display: inline-flex;
+      align-items: baseline;
+      justify-content: flex-end;
+      gap: 0.35em;
+      max-width: 100%;
+    }
+    table.results thead .hdr-inline--pct {
+      gap: 0.08em;
+    }
+    table.results thead .th-title {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    table.results thead .th-unit {
+      font-size: 0.72em;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      opacity: 0.88;
+      text-transform: lowercase;
+    }
+    table.results thead .th-pct-sym {
+      font-weight: 700;
+    }
+    table.results thead .th-pct-word {
+      text-transform: none;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+    }
+    table.results thead th {
+      font-family: "Cinzel", serif;
+      font-size: 0.62rem;
+      background: rgba(60,45,30,0.08);
+    }
     table.results td.num {
       font-variant-numeric: tabular-nums;
       white-space: nowrap;
@@ -284,13 +301,16 @@
             <table class="results">
               <thead>
                 <tr>
-                  <th rowspan="2">Зона</th>
-                  <th colspan="2">см</th>
-                  <th rowspan="2">% идеала</th>
-                </tr>
-                <tr>
-                  <th>Идеал</th>
-                  <th>Факт</th>
+                  <th class="th-zone">Зона</th>
+                  <th class="th-metric">
+                    <span class="hdr-inline"><span class="th-title">Идеал</span><span class="th-unit">см</span></span>
+                  </th>
+                  <th class="th-metric">
+                    <span class="hdr-inline"><span class="th-title">Факт</span><span class="th-unit">см</span></span>
+                  </th>
+                  <th class="th-pct-hdr">
+                    <span class="hdr-inline hdr-inline--pct"><span class="th-pct-sym">%</span><span class="th-pct-word">идеала</span></span>
+                  </th>
                 </tr>
               </thead>
               <tbody>
