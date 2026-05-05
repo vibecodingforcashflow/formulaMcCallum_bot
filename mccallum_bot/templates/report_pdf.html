@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>{{ title }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 0;
+      background: #d2c29a;
+    }
+    :root {
+      --ink: #1e1610;
+      --ink2: #3d2f22;
+      --frame: #5c4836;
+      --good: #1b6b32;
+      --bad: #a61c1c;
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body {
+      margin: 0;
+      padding: 6mm 5.5mm 5mm 5.5mm;
+      color: var(--ink);
+      font-family: "Cormorant Garamond", "DejaVu Serif", "Liberation Serif", Georgia, serif;
+      font-size: 11pt;
+      line-height: 1.32;
+      background: transparent;
+    }
+    .parchment {
+      position: relative;
+      background:
+        radial-gradient(ellipse 70% 45% at 50% 0%, rgba(255,245,220,0.22), transparent 58%),
+        linear-gradient(168deg, #d2c29a 0%, #bda67e 42%, #a68f64 100%);
+      padding: 0;
+      min-height: 0;
+    }
+    .frame-outer {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .ornament {
+      border: 2.5pt double var(--frame);
+      box-shadow:
+        0 0 0 0.75pt rgba(255,255,255,0.2) inset,
+        0 0 0 4pt rgba(60,45,30,0.07);
+      background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(0,0,0,0.04));
+      padding: 10pt 10pt 8pt 10pt;
+      overflow: hidden;
+    }
+    h1 {
+      font-family: "Cinzel", "Times New Roman", serif;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
+      font-size: 12.5pt;
+      margin: 0 0 6pt;
+      color: var(--ink);
+    }
+    .subtitle {
+      text-align: center;
+      font-style: italic;
+      font-size: 10.5pt;
+      opacity: 0.9;
+      margin: 0 0 4pt;
+    }
+    .tagline {
+      text-align: center;
+      font-size: 9pt;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      opacity: 0.75;
+      margin: 0 0 10pt;
+      font-family: "Cinzel", serif;
+    }
+    .grid-poster {
+      display: table;
+      width: 100%;
+      max-width: 100%;
+      table-layout: fixed;
+      border-collapse: separate;
+      border-spacing: 4pt 0;
+      page-break-inside: avoid;
+    }
+    .grid-poster > .col {
+      display: table-cell;
+      vertical-align: top;
+      width: 26%;
+      max-width: 26%;
+    }
+    .grid-poster > .col-center {
+      width: 35%;
+      max-width: 35%;
+    }
+    .grid-poster > .col-measures {
+      width: 39%;
+      max-width: 39%;
+      overflow: hidden;
+      /* Воздух между рамкой «Ваши замеры» и внешней рамкой — как слева у «Основа расчётов» */
+      padding-right: 10pt;
+      box-sizing: border-box;
+      vertical-align: top;
+    }
+    .panel {
+      border: 1.5pt solid rgba(60,45,30,0.45);
+      background: rgba(255,248,235,0.28);
+      padding: 8pt 6pt 8pt 7pt;
+      min-height: 0;
+      height: 100%;
+      max-width: 100%;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .panel-measures {
+      padding: 5pt 3pt 5pt 4pt;
+      max-width: 100%;
+    }
+    .panel-measures h2 {
+      margin: 0 0 6pt;
+      padding-bottom: 4pt;
+    }
+    .panel h2 {
+      font-family: "Cinzel", serif;
+      font-size: 7.5pt;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin: 0 0 8pt;
+      color: var(--ink2);
+      border-bottom: 0.75pt solid rgba(60,45,30,0.32);
+      padding-bottom: 5pt;
+    }
+    .formulas-lead {
+      margin: 0 0 6pt;
+      font-size: 14pt;
+      letter-spacing: 0.02em;
+    }
+    .panel .formulas { font-size: 12.5pt; }
+    .panel .formulas p { margin: 0 0 4pt; }
+    .panel .formulas strong { font-weight: 600; }
+    .figure-wrap {
+      border: 2.5pt double var(--frame);
+      padding: 5pt;
+      background: linear-gradient(145deg, rgba(255,255,255,0.12), rgba(0,0,0,0.05)), #c8b89a;
+    }
+    .figure-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 136mm;
+      object-fit: contain;
+    }
+    .figure-caption {
+      font-size: 8.5pt;
+      text-align: center;
+      font-style: italic;
+      opacity: 0.78;
+      margin-top: 5pt;
+    }
+    table.results {
+      width: 100%;
+      max-width: 100%;
+      table-layout: fixed;
+      border-collapse: collapse;
+      font-size: 7pt;
+      border: 0.75pt solid rgba(60,45,30,0.45);
+    }
+    table.results th,
+    table.results td {
+      padding: 2.5pt 1pt 2.5pt 2pt;
+      border-bottom: 0.5pt solid rgba(60,45,30,0.22);
+      vertical-align: middle;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+    table.results th:nth-child(1),
+    table.results td:nth-child(1) {
+      width: 22%;
+      text-align: left;
+      padding-left: 4pt;
+      padding-right: 2pt;
+      white-space: nowrap;
+      hyphens: none;
+      overflow-wrap: normal;
+      word-wrap: normal;
+      word-break: normal;
+    }
+    table.results th:nth-child(2),
+    table.results td:nth-child(2),
+    table.results th:nth-child(3),
+    table.results td:nth-child(3) {
+      width: 20%;
+      text-align: right;
+      padding-left: 1pt;
+      padding-right: 2pt;
+    }
+    table.results th:nth-child(4),
+    table.results td:nth-child(4) {
+      width: 38%;
+      text-align: right;
+      padding-left: 1pt;
+      padding-right: 3pt;
+    }
+    table.results th {
+      font-family: "Cinzel", serif;
+      font-size: 6.5pt;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: rgba(60,45,30,0.09);
+    }
+    table.results td.num {
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    table.results tr { page-break-inside: avoid; }
+    .pct {
+      font-size: 1.12em;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.15;
+      white-space: nowrap;
+      letter-spacing: -0.03em;
+    }
+    .pct.good { color: var(--good); }
+    .pct.bad { color: var(--bad); }
+    .corner-flourish {
+      text-align: center;
+      margin-top: 8pt;
+      margin-bottom: 0;
+      font-family: "Cinzel", serif;
+      font-size: 7.5pt;
+      letter-spacing: 0.32em;
+      opacity: 0.45;
+    }
+  </style>
+</head>
+<body>
+  <div class="parchment">
+    <div class="frame-outer">
+      <div class="ornament">
+        <h1>{{ title }}</h1>
+        <p class="subtitle">Объёмная грудная клетка - основа впечатляющего телосложения.</p>
+        <p class="tagline">Методика Маккаллума · анатомический ориентир</p>
+
+        <div class="grid-poster">
+          <div class="col">
+            <aside class="panel">
+              <h2>Основа расчётов</h2>
+              <div class="formulas">
+                <p class="formulas-lead"><strong>Запястье</strong></p>
+                <p><strong>Грудь</strong> = 6,5 × обхват запястья</p>
+                <p><strong>Талия</strong> = 0,70 × грудь</p>
+                <p><strong>Бедро</strong> = 0,53 × грудь</p>
+                <p><strong>Шея</strong> = 0,37 × грудь</p>
+                <p><strong>Бицепс</strong> = 0,36 × грудь</p>
+                <p><strong>Голень</strong> = 0,34 × грудь</p>
+                <p><strong>Предплечье</strong> = 0,29 × грудь</p>
+              </div>
+            </aside>
+          </div>
+          <div class="col col-center">
+            <div class="figure-wrap">
+              <img src="{{ reference_image_data_uri }}" alt="Схема пропорций" />
+            </div>
+            <p class="figure-caption">Узкий торс убивает визуальную мощь, стремись к правильным пропорциям!</p>
+          </div>
+          <div class="col col-measures">
+            <aside class="panel panel-measures">
+              <h2>Ваши замеры</h2>
+              <table class="results">
+                <thead>
+                  <tr>
+                    <th>Зона</th>
+                    <th>Идеал</th>
+                    <th>Факт</th>
+                    <th>% идеала</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for r in rows %}
+                  <tr>
+                    <td>{{ r.name }}</td>
+                    <td class="num">{{ "%.1f"|format(r.ideal) }} см</td>
+                    <td class="num">{{ "%.1f"|format(r.actual) }} см</td>
+                    <td class="pct {{ r.cls }}">{{ "%.1f"|format(r.pct) }}%</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </aside>
+          </div>
+        </div>
+
+        <p class="corner-flourish">— · —</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
