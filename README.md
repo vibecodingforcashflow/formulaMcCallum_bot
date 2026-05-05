@@ -7,11 +7,27 @@ Telegram-бот считает индивидуальные идеальные �
 WeasyPrint для PDF требует нативные библиотеки. Примеры:
 
 - **Arch / Steam Deck:** `sudo pacman -S pango gdk-pixbuf2 libffi cairo`
-- **Debian/Ubuntu:** `sudo apt install libpango-1.0-0 libpangocairo-1.0-0 libgdk-pixbuf2.0-0 libffi-dev shared-mime-info fonts-dejavu-core`
+- **Debian/Ubuntu:** `sudo apt install libglib2.0-0 libpango-1.0-0 libpangocairo-1.0-0 libgdk-pixbuf-2.0-0 libcairo2 libffi-dev shared-mime-info fonts-dejavu-core`
 
 Шрифты **DejaVu** нужны, чтобы в PDF/PNG таблица с цифрами рендерилась без сетевых Google Fonts (на сервере CDN часто недоступен).
 
 После установки: `pip install -r requirements.txt`
+
+## Docker (VPS)
+
+В репозитории есть `Dockerfile` и `compose.yml` с нужными **apt**-зависимостями для WeasyPrint.
+
+В `.env` для контейнера укажи путь к БД на томе, например:
+
+`DB_PATH=/data/mccallum.sqlite3`
+
+Далее:
+
+```bash
+docker compose build --no-cache
+docker compose up -d
+docker compose logs -f --tail 50
+```
 
 ## Запуск локально
 
