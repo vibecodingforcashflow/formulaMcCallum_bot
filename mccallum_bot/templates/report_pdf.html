@@ -3,9 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>{{ title }}</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <!-- Без Google Fonts: на VPS/Docker CDN недоступен — Pango подставляет сломанный шрифт, цифры превращаются в кляксы. -->
   <style>
     @page {
       size: A4 portrait;
@@ -25,7 +23,7 @@
       margin: 0;
       padding: 6mm 5.5mm 5mm 5.5mm;
       color: var(--ink);
-      font-family: "Cormorant Garamond", "DejaVu Serif", "Liberation Serif", Georgia, serif;
+      font-family: "DejaVu Serif", "Liberation Serif", Georgia, "Times New Roman", serif;
       font-size: 11pt;
       line-height: 1.32;
       background: transparent;
@@ -55,7 +53,7 @@
       overflow: hidden;
     }
     h1 {
-      font-family: "Cinzel", "Times New Roman", serif;
+      font-family: "DejaVu Serif", "Times New Roman", serif;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -78,7 +76,7 @@
       text-transform: uppercase;
       opacity: 0.75;
       margin: 0 0 10pt;
-      font-family: "Cinzel", serif;
+      font-family: "DejaVu Serif", serif;
     }
     .grid-poster {
       display: table;
@@ -127,8 +125,8 @@
       padding-bottom: 4pt;
     }
     .panel h2 {
-      font-family: "Cinzel", serif;
-      font-size: 7.5pt;
+      font-family: "DejaVu Sans", sans-serif;
+      font-size: 8.5pt;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       margin: 0 0 8pt;
@@ -168,7 +166,7 @@
       max-width: 100%;
       table-layout: fixed;
       border-collapse: collapse;
-      font-size: 7pt;
+      font-size: 10pt;
       border: 0.75pt solid rgba(60,45,30,0.45);
     }
     table.results th,
@@ -208,24 +206,26 @@
       padding-right: 3pt;
     }
     table.results th {
-      font-family: "Cinzel", serif;
-      font-size: 6.5pt;
-      letter-spacing: 0.06em;
+      font-family: "DejaVu Sans", sans-serif;
+      font-size: 8.5pt;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       background: rgba(60,45,30,0.09);
     }
     table.results td.num {
+      font-family: "DejaVu Sans", sans-serif;
       font-variant-numeric: tabular-nums;
       white-space: nowrap;
     }
     table.results tr { page-break-inside: avoid; }
     .pct {
-      font-size: 1.12em;
-      font-weight: 900;
+      font-family: "DejaVu Sans", sans-serif;
+      font-size: 11pt;
+      font-weight: 700;
       font-variant-numeric: tabular-nums;
-      line-height: 1.15;
+      line-height: 1.2;
       white-space: nowrap;
-      letter-spacing: -0.03em;
+      letter-spacing: 0;
     }
     .pct.good { color: var(--good); }
     .pct.bad { color: var(--bad); }
@@ -233,7 +233,7 @@
       text-align: center;
       margin-top: 8pt;
       margin-bottom: 0;
-      font-family: "Cinzel", serif;
+      font-family: "DejaVu Serif", serif;
       font-size: 7.5pt;
       letter-spacing: 0.32em;
       opacity: 0.45;
